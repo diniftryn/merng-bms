@@ -99,7 +99,7 @@ const mutation = new GraphQLObjectType({
           });
         });
 
-        return Instructor.findByIdAndRemove(args.id);
+        return Instructor.findByIdAndDelete(args.id);
       }
     },
     // Add a skatingClass
@@ -112,12 +112,14 @@ const mutation = new GraphQLObjectType({
           type: new GraphQLEnumType({
             name: "ClassStatus",
             values: {
-              new: { value: "Not Started" },
+              new: { value: "Coming Soon" },
+              enrolment: { value: "Enrolment" },
+              enrolment: { value: "Enrolment" },
               progress: { value: "In Progress" },
               completed: { value: "Completed" }
             }
           }),
-          defaultValue: "Not Started"
+          defaultValue: "Coming Soon"
         },
         instructorId: { type: GraphQLNonNull(GraphQLID) }
       },
@@ -139,7 +141,7 @@ const mutation = new GraphQLObjectType({
         id: { type: GraphQLNonNull(GraphQLID) }
       },
       resolve(parent, args) {
-        return Class.findByIdAndRemove(args.id);
+        return Class.findByIdAndDelete(args.id);
       }
     },
     // Update a skatingClass
@@ -153,7 +155,8 @@ const mutation = new GraphQLObjectType({
           type: new GraphQLEnumType({
             name: "ClassStatusUpdate",
             values: {
-              new: { value: "Not Started" },
+              new: { value: "Coming Soon" },
+              enrolment: { value: "Enrolment" },
               progress: { value: "In Progress" },
               completed: { value: "Completed" }
             }

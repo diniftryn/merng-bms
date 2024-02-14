@@ -1,6 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_CLASS } from "../queries/classQueries";
+import DeleteClassButton from "../components/DeleteClassButton";
+import EditClassForm from "../components/EditClassForm";
 
 export default function Class() {
   const { id } = useParams();
@@ -24,6 +26,10 @@ export default function Class() {
           <p className="lead">{data.class.status}</p>
 
           <InstructorInfo instructor={data.class.instructor} />
+
+          <DeleteClassButton classId={data.class.id} />
+
+          <EditClassForm skatingClass={data.class} />
         </div>
       )}
     </>

@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { GET_CLASSES } from "../queries/classQueries";
+import AddClassModal from "./AddClassModal";
 
 export default function Classes() {
   const { loading, error, data } = useQuery(GET_CLASSES);
@@ -12,9 +13,13 @@ export default function Classes() {
       {data.classes.length > 0 ? (
         <div>
           <h1>Classes Available</h1>
+
+          <AddClassModal />
           {data.classes.map(({ id, name, description, status }: { id: string; name: string; description: string; status: string }) => (
             <div key={id}>
-              <h3>{name}</h3>
+              <h3>
+                {name} {id}
+              </h3>
               <br />
               <p>{description}</p>
               <p>{status}</p>

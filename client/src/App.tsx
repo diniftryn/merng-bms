@@ -4,9 +4,28 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Class from "./pages/Class";
 
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        instructors: {
+          merge(_existing, incoming) {
+            return incoming;
+          }
+        },
+        classes: {
+          merge(_existing, incoming) {
+            return incoming;
+          }
+        }
+      }
+    }
+  }
+});
+
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql",
-  cache: new InMemoryCache()
+  cache
 });
 
 export default function App() {
